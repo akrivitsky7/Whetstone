@@ -8,7 +8,7 @@ c As soon as above copyright notes are mentioned,
 c the author grants a permission to any person or organization
 c to use, distribute and publish this code for free
 c Questions and comments may be directed to the author at
-c akrivitsky@yahoo.com and akrivitsky@usa.com
+c akrivitsky@yahoo.com and akrivitsky@gmail.com
 
 c Disclaimer of Liability
 c The user assumes all responsibility

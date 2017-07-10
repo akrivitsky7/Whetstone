@@ -8,7 +8,7 @@
 { the author grants a permission to any person or organization}
 { to use, distribute and publish this code for free}
 { Questions and comments may be directed to the author at}
-{ akrivitsky@yahoo.com and akrivitsky@usa.com}
+{ akrivitsky@yahoo.com and akrivitsky@gmail.com}
 
 { Disclaimer of Liability}
 { The user assumes all responsibility }
