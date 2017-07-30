@@ -21,9 +21,12 @@ C
 -------------
 
 The file with source code is **dwhet.c**.
-It runs fine under GCC 5.1.0 
+It runs fine under GCC 7.1.1 (run under Fedora 26) 
 Your compiler may complain on how to deal with timing, in this case minor chages will be required.
 You may want to use like 4000 2000 as a number of inner loops and a number of outer loops and than adjust it as needed. 
+Under Fedora 26 it was compiled using the following command:
+gcc -OFast dwhet.c -o dwhet_run_fast -lm
+3000 and 1000 was used as a number of inner loops and a number of outer loops 
 
 
 Fortran
