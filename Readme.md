@@ -25,7 +25,7 @@ It runs fine under GCC 7.1.1 (run under Fedora 26)
 Your compiler may complain on how to deal with timing, in this case minor chages will be required.
 You may want to use like 4000 2000 as a number of inner loops and a number of outer loops and than adjust it as needed. 
 Under Fedora 26 it was compiled using the following command:
-gcc -OFast dwhet.c -o dwhet_run_fast -lm
+gcc -Ofast dwhet.c -o dwhet_run_fast -lm
 3000 and 1000 was used as a number of inner loops and a number of outer loops 
 
 
@@ -33,9 +33,19 @@ Fortran
 -------------
 
 The source code is in file **dwhet.f**. It is compiled gfortran but you can adjust it to your fortran compiler with little or no changes. 
-1000 300 as a number of inner loops and a number of outer loops.
+3000 1000 as a number of inner loops and a number of outer loops.
 
-Suppose that you run from command line, you will be asked to enter it.
+Examples of compile and run using different compilers:
+
+1. **Intel(R) Fortran Compiler Version 17.0.4.196** from Intel Parallel Studio XE Professional Edition for Fortran (2017) 
+ifort dwhet.f -o Dwhet_optimized_with_intel -O3 -ipo -no-prec-div
+or 
+ifort dwhet.f -o Dwhet_optimized_with_intel -Ofast
+
+2. **gfortran from gcc 7.1.1**
+gfortran dwhet.f -o Dwhet_gcc -Ofast
+
+Suppose that you run  your code (compiled as shown above) from command line, you will be asked to a enter number of inner loops and a number of outer loops.
 
  
 Free Pascal
