@@ -28,6 +28,18 @@ Under Fedora 26 it was compiled using the following command:
 gcc -Ofast dwhet.c -o dwhet_run_fast -lm
 3000 and 1000 was used as a number of inner loops and a number of outer loops 
 
+C++ for Microsoft Visual Studio 2017
+-------------
+The file with source code is **Dwhet.cpp**.
+As you may guess, the program is compliled with Microsoft Visual Studio 2017 and can be run within it.
+To compile you may want to do the following
+1. Create new project as Visual C++ console application. For brevity we will further use name Dwhet for it.
+2. Open Dwhet.cpp within the project (if needed replace content with Dwhet.cpp from this repository).
+3. Choose Project | Properties and after that add _CRT_SECURE_NO_WARNINGS; to Preprocessor Definitions (just after CONSOLE);
+Please note that you will need to do point 3 above both for Debug and Release configurations
+3000 and 1000 was used as a number of inner loops and a number of outer loops  for PC with Intel Core i7 @ 2.8 GHz
+
+  
 
 Fortran
 -------------
