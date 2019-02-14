@@ -3,7 +3,7 @@ Welcome to my perfomance whetstone benchmarks for different languages!
 
 
 
- In this repository, you will find 5 simple samples of popular **Whetsone** benchmark. Why whetstone? Well, it is easy, widespread and relatively accurate.  That's why it can be imlemented among different technologies (including but not limited to different languages, compilers, hardware etc). So you have some assrance that you are
+ In this repository, you will find 5 simple samples of popular **Whetsone** benchmark. Why whetstone? Well, it is easy, widespread and relatively accurate.  That's why it can be imlemented among different technologies (including but not limited to different languages, compilers, hardware etc). So with whetstone you will have some assurance that you are
 comparing "oranges to oranges" in terms of performance.  I personally use this kind of testing each time I buy a new computer, install new compiler etc.
 
 Java
