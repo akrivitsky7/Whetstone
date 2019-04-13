@@ -3,7 +3,7 @@
 /*
 **Copyright notes**
 
-(c) Copyright 2002 - 2017 Anatoly S. Krivitsky, Ph.D.
+(c) Copyright 2002 - 2019 Anatoly S. Krivitsky, Ph.D.
 All rights reserved
 
 Conditional permission for free use of the code
