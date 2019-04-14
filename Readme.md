@@ -21,11 +21,12 @@ C
 -------------
 
 The file with source code is **dwhet.c**.
-It runs fine under GCC 8.2.1 (run under Fedora 29) 
+It runs fine under GCC  8.3.1 (run under Fedora 29) 
 Your compiler may complain on how to deal with timing, in this case minor chages will be required.
 You may want to use like 4000 2000 as a number of inner loops and a number of outer loops and than adjust it as needed. 
 Under Fedora 29 it was compiled using the following command:
 gcc -Ofast dwhet.c -o dwhet_run_fast -lm
+
 3000 and 1000 was used as a number of inner loops and a number of outer loops 
 
 Also it was compiled with Intel(R) Parallel Studio XE 2019 Update 1 Professional Edition for Fortran and C++ Linux 
@@ -59,10 +60,11 @@ ifort dwhet.f -o Dwhet_optimized_with_intel -O3 -ipo -no-prec-div
 or 
 ifort dwhet.f -o Dwhet_optimized_with_intel -Ofast
 
-2. **gfortran from gcc 8.2.1**
+2. **gfortran from gcc 8.3.1**
+
 gfortran dwhet.f -o Dwhet_gcc -Ofast
 
-Suppose that you run  your code (compiled as shown above) from command line, you will be asked to a enter number of inner loops and a number of outer loops.
+Suppose that you run  your code (compiled as shown above) from command line, you will be asked to a enter number of inner loops and a number of outer loops. Please see recommendations above.
 
  
 Free Pascal
