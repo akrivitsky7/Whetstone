@@ -21,15 +21,15 @@ C
 -------------
 
 The file with source code is **dwhet.c**.
-It runs fine under GCC  8.3.1 (run under Fedora 29) 
+It runs fine under gcc  9.2.1-1 (run under Fedora 31) 
 Your compiler may complain on how to deal with timing, in this case minor chages will be required.
 You may want to use like 4000 2000 as a number of inner loops and a number of outer loops and than adjust it as needed. 
-Under Fedora 29 it was compiled using the following command:
+Under Fedora 31 it was compiled using the following command:
 gcc -Ofast dwhet.c -o dwhet_run_fast -lm
 
 3000 and 1000 was used as a number of inner loops and a number of outer loops 
 
-Also it was compiled with Intel(R) Parallel Studio XE 2019 Update 1 Professional Edition for Fortran and C++ Linux 
+Also it was compiled with Intel(R) Parallel Studio XE 2019 Update 4 for Linux* Professional Edition for Fortran and C++ Linux 
 using the following command:
 icc dwhet.c -o Dwhet_optimized_with_intel_c.exe -O3 -ipo -no-prec-div
 
@@ -55,12 +55,12 @@ The source code is in file **dwhet.f**. It is compiled gfortran but you can adju
 
 Examples of compile and run using different compilers:
 
-1. **Intel(R) Fortran Compiler Version  19.0.1.144** from Intel(R) Parallel Studio XE 2019 Update 1 Professional Edition for Fortran and C++ Linux  
+1. **Intel(R) Fortran Compiler Version  19.0.5.281** from Intel(R) Parallel Studio XE 2019 Update 4 Professional Edition for Fortran and C++ Linux  
 ifort dwhet.f -o Dwhet_optimized_with_intel -O3 -ipo -no-prec-div
 or 
 ifort dwhet.f -o Dwhet_optimized_with_intel -Ofast
 
-2. **gfortran from gcc 8.3.1**
+2. **gfortran from gcc 9.2.1-1**
 
 gfortran dwhet.f -o Dwhet_gcc -Ofast
 
