@@ -29,7 +29,7 @@ gcc -Ofast dwhet.c -o dwhet_run_fast -lm
 
 3000 and 1000 was used as a number of inner loops and a number of outer loops 
 
-Also it was compiled with Intel(R) Parallel Studio XE 2019 Update 4 for Linux* Professional Edition for Fortran and C++ Linux 
+Also it was compiled with Intel(R) Parallel Studio XE 2020 for Linux* Professional Edition for Fortran and C++ Linux 
 using the following command:
 icc dwhet.c -o Dwhet_optimized_with_intel_c.exe -O3 -ipo -no-prec-div
 
@@ -55,7 +55,7 @@ The source code is in file **dwhet.f**. It is compiled gfortran but you can adju
 
 Examples of compile and run using different compilers:
 
-1. **Intel(R) Fortran Compiler Version  19.0.5.281** from Intel(R) Parallel Studio XE 2019 Update 4 Professional Edition for Fortran and C++ Linux  
+1. **Intel(R) Fortran Compiler Version  19.1.0.166** from Intel(R) Parallel Studio XE 2020 Professional Edition for Fortran and C++ Linux  
 ifort dwhet.f -o Dwhet_optimized_with_intel -O3 -ipo -no-prec-div
 or 
 ifort dwhet.f -o Dwhet_optimized_with_intel -Ofast
