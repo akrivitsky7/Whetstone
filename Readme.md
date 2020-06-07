@@ -51,7 +51,7 @@ Fortran
 -------------
 
 The source code is in file **dwhet.f**. It is compiled gfortran but you can adjust it to your fortran compiler with little or no changes. 
-3000 1000 as a number of inner loops and a number of outer loops.
+You may want to start from 6000 2000 as a number of inner loops and a number of outer loops and after several runs adjust it accordingly.
 
 Examples of compile and run using different compilers:
 
@@ -60,7 +60,7 @@ ifort dwhet.f -o Dwhet_optimized_with_intel -O3 -ipo -no-prec-div
 or 
 ifort dwhet.f -o Dwhet_optimized_with_intel -Ofast
 
-2. **gfortran from gcc 9.2.1-1**
+2. **gfortran from gcc 10.1.0**
 
 gfortran dwhet.f -o Dwhet_gcc -Ofast
 
@@ -70,20 +70,21 @@ Suppose that you run  your code (compiled as shown above) from command line, you
 Free Pascal
 -------------
 
-I tried this one only on Windows, though it looks like that there is no explicit dependencies on any operating system here.
-If you use the latest release (which is 3.0.2 at the time of writing) and if your Windows System is 64-bit you may want to use ppcrossx64.exe with corresponding options for compilation.
+I tried this one on Windows 10 and Ubuntu 20.04 (under WSL). 
+If you use the latest release (which is 3.0.4 at the time of writing) and if your Windows System is 64-bit you may want to use ppcrossx64.exe with corresponding options for compilation.
+If you use it on Ubuntu 20.04 you may want to use fpc.
 The file name is   **whet.pas** 
 
 My articles in Java Development Journal  that may help you
 -------------
-http://anatolykrivitsky.sys-con.com/ 
+http://web.archive.org/web/20190703063724/http://anatolykrivitsky.sys-con.com/ 
 
 Legal text related to the code
 -------------
 
 **Copyright notes**
 
- (c) Copyright 2002 - 2019 Anatoly S. Krivitsky, Ph.D.
+ (c) Copyright 2002 - 2020 Anatoly S. Krivitsky, Ph.D.
  All rights reserved
 
  Conditional permission for free use of the code
