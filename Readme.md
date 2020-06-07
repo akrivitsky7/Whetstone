@@ -55,7 +55,7 @@ You may want to start from 6000 2000 as a number of inner loops and a number of 
 
 Examples of compile and run using different compilers:
 
-1. **Intel(R) Fortran Compiler Version  19.1.0.166** from Intel(R) Parallel Studio XE 2020 Professional Edition for Fortran and C++ Linux  
+1. **Intel(R) Fortran Compiler Version  19.1.1.217** from Intel(R) Parallel Studio XE 2020 Update 1 for Linux  
 ifort dwhet.f -o Dwhet_optimized_with_intel -O3 -ipo -no-prec-div
 or 
 ifort dwhet.f -o Dwhet_optimized_with_intel -Ofast
