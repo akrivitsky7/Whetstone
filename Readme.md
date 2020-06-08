@@ -21,15 +21,15 @@ C
 -------------
 
 The file with source code is **dwhet.c**.
-It runs fine under gcc  9.2.1-1 (run under Fedora 31) 
+It runs fine under gcc version 10.1.0  
 Your compiler may complain on how to deal with timing, in this case minor chages will be required.
-You may want to use like 4000 2000 as a number of inner loops and a number of outer loops and than adjust it as needed. 
-Under Fedora 31 it was compiled using the following command:
+ 
+It was compiled using the following command:
 gcc -Ofast dwhet.c -o dwhet_run_fast -lm
 
 3000 and 1000 was used as a number of inner loops and a number of outer loops 
 
-Also it was compiled with Intel(R) Parallel Studio XE 2020 for Linux* Professional Edition for Fortran and C++ Linux 
+Also it was compiled with Intel(R) Parallel Studio XE 2020 Update 1 for Linux with icc version 19.1.1.217  
 using the following command:
 icc dwhet.c -o Dwhet_optimized_with_intel_c.exe -O3 -ipo -no-prec-div
 
