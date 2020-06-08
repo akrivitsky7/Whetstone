@@ -64,6 +64,11 @@ ifort dwhet.f -o Dwhet_optimized_with_intel -Ofast
 
 gfortran dwhet.f -o Dwhet_gcc -Ofast
 
+
+3. **pgfortran 19.10-0 64-bit**
+
+pgfortran -opgi_dwhet_2020.exe -O3 dwhet.f   
+
 Suppose that you run  your code (compiled as shown above) from command line, you will be asked to a enter number of inner loops and a number of outer loops. Please see recommendations above.
 
  
