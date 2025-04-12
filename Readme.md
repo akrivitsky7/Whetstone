@@ -21,7 +21,7 @@ C
 -------------
 
 The file with source code is **dwhet.c**.
-It runs fine under gcc version 10.1.0  
+It runs fine under gcc version 14.2.0  
 Your compiler may complain on how to deal with timing, in this case minor chages will be required.
  
 It was compiled using the following command:
@@ -60,7 +60,7 @@ ifort dwhet.f -o Dwhet_optimized_with_intel -O3 -ipo -no-prec-div
 or 
 ifort dwhet.f -o Dwhet_optimized_with_intel -Ofast
 
-2. **gfortran from gcc 10.1.0**
+2. **gfortran from gcc  14.2.0**
 
 gfortran dwhet.f -o Dwhet_gcc -Ofast
 
@@ -75,8 +75,13 @@ Suppose that you run  your code (compiled as shown above) from command line, you
 Free Pascal
 -------------
 
-I tried this one on Windows 10 and Ubuntu 20.04 (under WSL). 
-If you use the latest release (which is 3.0.4 at the time of writing) and if your Windows System is 64-bit you may want to use ppcrossx64.exe with corresponding options for compilation.
+I tried this one on Windows 11 and Ubuntu 20.04 (under WSL). 
+If you use the latest release (which is 3.2.2 at the time of writing) and if your Windows System is 64-bit you may want to use ppcrossx64.exe with corresponding options for compilation.
+Options depend on your CPU. For example, if you have Intel Core i7 CPU like Intel Core i7-1360P
+you may want to use the following options:
+
+ppcrossx64 -O3 -OoFASTMATH -CpCOREAVX2 -Xs -XX -Sh whet.pas
+
 If you use it on Ubuntu 20.04 you may want to use fpc.
 The file name is   **whet.pas** 
 

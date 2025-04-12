@@ -1,7 +1,7 @@
 /*
 **Copyright notes**
 
- (c) Copyright 2002 - 2020 Anatoly S. Krivitsky, Ph.D.
+ (c) Copyright 2002 - 2025 Anatoly S. Krivitsky, Ph.D.
  All rights reserved
 
  Conditional permission for free use of the code

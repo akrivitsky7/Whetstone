@@ -1,6 +1,6 @@
 c Copyright notes
 c Gnu Fortran Whetstone Double Precision Benchmark
-c (c) Copyright 2002 - 2020 Anatoly S. Krivitsky, Ph.D.
+c (c) Copyright 2002 - 2025 Anatoly S. Krivitsky, Ph.D.
 c All rights reserved
 
 c Conditional permission for free use of the code
