@@ -1,0 +1,17 @@
+[package]
+name = "whetstone_rust"
+version = "0.1.0"
+edition = "2021"
+authors = ["Anatoly S. Krivitsky,PhD <akrivitsky@gmail.com>"]
+description = "Whetstone Double Precision Benchmark in Rust"
+license = "Please see comments in main.rs"
+
+[profile.release]
+opt-level = 3              # Maximum optimization
+lto = true                 # Link-time optimization
+codegen-units = 1          # Better inlining (slower compile, faster run)
+debug = false              # Remove debug info
+panic = 'abort'            # Smaller binary and faster runtime
+strip = true               # Remove symbols (needs nightly or external tool)
+
+[dependencies]
