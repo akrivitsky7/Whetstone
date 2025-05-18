@@ -95,6 +95,26 @@ The file name is **whestone.jl**.
 
 For the first run you may want to use 1000 3000 as a number of inner loops and a number of outer loops. After that you may want to adjust it according to your CPU clock speed.
 
+Rust
+-------------
+Please note the structure of directories under whetstone_rust foldrer as you may want to use something similar.
+As we are going to use Cargo, Cargo.toml file is included.
+
+The file with whetstone code is **main.rs** under src folder.
+
+It is compiled using the following command:
+
+cargo build --release
+
+Executable file (e.g. whetstone_rust.exe if you run on windows) will be created under target/release folder.
+
+Executable can be run with the following command:
+
+cargo run --release
+
+
+As with other languages you may want to start with 1000 3000 as a number of inner loops and a number of outer loops and after that adjust it according to your CPU clock speed.
+
 
 My articles in Java Development Journal  that may help you
 -------------
