@@ -34,10 +34,10 @@ using the following command:
 icc dwhet.c -o Dwhet_optimized_with_intel_c.exe -O3 -ipo -no-prec-div
 
 
-C++ for Microsoft Visual Studio 2017 - 2019
+C++ for Microsoft Visual Studio 2017 - 2022
 -------------
 The file with source code is **Dwhet.cpp**.
-As you may guess, the program is compliled with Microsoft Visual Studio 2017 and can be run within it.
+As you may guess, the program is compliled with Microsoft Visual Studio 2017 - 2022 and can be run within it.
 To compile you may want to do the following
 1. Create new project as Visual C++ console application. For brevity we will further use name Dwhet for it.
 2. Open Dwhet.cpp within the project (if needed replace content with Dwhet.cpp from this repository).
