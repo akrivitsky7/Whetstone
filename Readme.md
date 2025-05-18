@@ -85,6 +85,17 @@ ppcrossx64 -O3 -OoFASTMATH -CpCOREAVX2 -Xs -XX -Sh whet.pas
 If you use it on Ubuntu 20.04 you may want to use fpc.
 The file name is   **whet.pas** 
 
+Julia
+-------------
+You may want to try the following command:
+
+julia --optimize=3 --check-bounds=no whestone.jl
+
+The file name is **whestone.jl**.
+
+For the first run you may want to use 1000 3000 as a number of inner loops and a number of outer loops. After that you may want to adjust it according to your CPU clock speed.
+
+
 My articles in Java Development Journal  that may help you
 -------------
 http://web.archive.org/web/20190703063724/http://anatolykrivitsky.sys-con.com/ 
