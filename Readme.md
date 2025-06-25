@@ -58,9 +58,9 @@ Suggested arguments: `3000 1000` (e.g., for Intel Core i7 @ 2.8 GHz)
 ## Fortran
 
 * Most compilers use **dwhet.f**
-* For NVIDIA `nvfortran`, use: **parallel.cuf**
+* For NVIDIA `nvfortran`, use: **whet_cuda_parallel.cuf**
 
-**Suggested arguments:** `6000 2000`, then adjust.
+**Suggested arguments for dwhet.f:** `6000 2000`, then adjust.
 
 ### Example compilation:
 
