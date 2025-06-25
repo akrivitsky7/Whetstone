@@ -1,0 +1,168 @@
+! Copyright notes
+! CUDA Fortran Whetstone Double Precision Benchmark
+! (c) Copyright 2002 - 2025 Anatoly S. Krivitsky, Ph.D.
+! All rights reserved
+
+! Conditional permission for free use of the code
+! As soon as above copyright notes are mentioned,
+! the author grants permission to use, distribute and publish this code for free
+! Contact: akrivitsky@yahoo.com or akrivitsky@gmail.com
+
+! Disclaimer of Liability
+! The user assumes all responsibility and risk for use of this code "as is".
+! No warranty of any kind is provided.
+
+module whetstone_cuda_parallel
+  use cudafor
+  implicit none
+contains
+
+subroutine cudafor_sync()
+  use cudafor
+  integer :: istat
+  istat = cudaDeviceSynchronize()
+end subroutine cudafor_sync
+
+attributes(global) subroutine sub1_kernel(e1_all, t1, t3, inner)
+  real(8), device :: e1_all(:,:)
+  real(8), value :: t1, t3
+  integer, value :: inner
+  integer :: i, tid
+  real(8) :: e(4)
+
+  tid = threadIdx%x + (blockIdx%x - 1) * blockDim%x
+  if (tid > size(e1_all, 2)) return
+
+  e(1:4) = e1_all(1:4, tid)
+
+  do i = 1, inner
+    e(1) = (e(1) + e(2) + e(3) - e(4)) * t1
+    e(2) = (e(1) + e(2) - e(3) + e(4)) * t1
+    e(3) = (e(1) - e(2) + e(3) + e(4)) * t1
+    e(4) = (-e(1) + e(2) + e(3) + e(4)) / t3
+  end do
+
+  e1_all(1:4, tid) = e(1:4)
+end subroutine sub1_kernel
+
+attributes(global) subroutine sub2_kernel(x, y, z, t1, t3, inner)
+  real(8), device :: x(:), y(:), z(:)
+  real(8), value :: t1, t3
+  integer, value :: inner
+  integer :: tid, i
+  real(8) :: x1, y1
+
+  tid = threadIdx%x + (blockIdx%x - 1) * blockDim%x
+  if (tid > size(x)) return
+
+  x1 = x(tid)
+  y1 = y(tid)
+
+  do i = 1, inner
+    x1 = (x1 + y1) * t1
+    y1 = (x1 + y1) * t1
+  end do
+
+  z(tid) = (x1 + y1) / t3
+end subroutine sub2_kernel
+
+attributes(global) subroutine sub3_kernel(e1_all)
+  real(8), device :: e1_all(:,:)
+  integer :: tid
+  real(8) :: tmp
+
+  tid = threadIdx%x + (blockIdx%x - 1) * blockDim%x
+  if (tid > size(e1_all, 2)) return
+
+  tmp = e1_all(1, tid)
+  e1_all(1, tid) = e1_all(2, tid)
+  e1_all(2, tid) = e1_all(3, tid)
+  e1_all(3, tid) = tmp
+end subroutine sub3_kernel
+
+subroutine run_parallel_whetstone(inner, outer, nthreads)
+  use cudafor
+  implicit none
+  integer, intent(in) :: inner, outer, nthreads
+  real(8), device :: e1_d(4, nthreads), x_d(nthreads), y_d(nthreads), z_d(nthreads)
+  real(8) :: t1, t3
+  real(8) :: clk_rate, time1, time2
+  real(8) :: perf1, perf2, time_err, perf_err, perc_err
+  integer(8) :: clk_start, clk_end
+
+  t1 = 0.499975D0
+  t3 = 2.0D0
+
+  call system_clock(count_rate=clk_rate)
+
+  ! Pass 1
+  call system_clock(count=clk_start)
+
+  call sub1_kernel<<<(nthreads+255)/256, 256>>>(e1_d, t1, t3, inner)
+  call cudafor_sync()
+
+  call sub2_kernel<<<(nthreads+255)/256, 256>>>(x_d, y_d, z_d, t1, t3, inner)
+  call cudafor_sync()
+
+  call sub3_kernel<<<(nthreads+255)/256, 256>>>(e1_d)
+  call cudafor_sync()
+
+  call system_clock(count=clk_end)
+  time1 = dble(clk_end - clk_start) / clk_rate
+  perf1 = abs(100.0D0 * dble(outer * inner * nthreads) / time1)
+
+  ! Pass 2
+  call system_clock(count=clk_start)
+
+  call sub1_kernel<<<(nthreads+255)/256, 256>>>(e1_d, t1, t3, inner * 2)
+  call cudafor_sync()
+
+  call sub2_kernel<<<(nthreads+255)/256, 256>>>(x_d, y_d, z_d, t1, t3, inner * 2)
+  call cudafor_sync()
+
+  call sub3_kernel<<<(nthreads+255)/256, 256>>>(e1_d)
+  call cudafor_sync()
+
+  call system_clock(count=clk_end)
+  time2 = dble(clk_end - clk_start) / clk_rate
+  perf2 = abs(100.0D0 * dble(outer * inner * 2 * nthreads) / time2)
+
+  ! Compute errors
+  time_err  = abs(time2 - time1 * 2)
+  perf_err  = abs(perf1 - perf2)
+  perc_err  = perf_err * 100.0D0 / perf2
+
+  print *, 'Pass 1:'
+  print *, ' Elapsed time:', time1, 'sec'
+  print *, ' Performance:', perf1, 'double-precision kWhets/sec'
+  print *
+  print *, 'Pass 2:'
+  print *, ' Elapsed time:', time2, 'sec'
+  print *, ' Performance:', perf2, 'double-precision kWhets/sec'
+  print *
+  print *, '=============================================='
+  print *, ' Time error     =', time_err, 'sec'
+  print *, ' Perf error     =', perf_err, 'kWhets/sec'
+  print *, ' % Perf error   =', perc_err, 'percent'
+  print *, '=============================================='
+  if (time2 < 10.0D0) then
+    print *, 'TIME is less than 10 seconds -- suggest larger inner loop'
+  end if
+end subroutine run_parallel_whetstone
+
+end module whetstone_cuda_parallel
+
+program main
+  use whetstone_cuda_parallel
+  implicit none
+  integer :: inner, outer, nthreads
+
+  print *, 'Enter inner loop count:'
+  read *, inner
+  print *, 'Enter outer loop count:'
+  read *, outer
+  print *, 'Enter number of GPU threads:'
+  read *, nthreads
+
+  call run_parallel_whetstone(inner, outer, nthreads)
+end program main

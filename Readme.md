@@ -1,150 +1,194 @@
-Welcome to my perfomance whetstone benchmarks for different languages!
-===================
+# Welcome to My Whetstone Performance Benchmarks Across Languages!
 
 
+In this repository, you'll find simple implementations of the popular **Whetstone** benchmark. Why Whetstone? It's easy to understand, widely adopted, and relatively accurate. This makes it ideal for comparing performance across various technologies—different languages, compilers, and hardware. With Whetstone, you can feel confident you're comparing "oranges to oranges."
 
- In this repository you will find 5 simple samples of popular **Whetsone** benchmark. Why whetstone? Well, it is easy, widespread and relatively accurate.  That's why it can be imlemented among different technologies (including but not limited to different languages, compilers, hardware etc). So with whetstone you will have some assurance that you are
-comparing "oranges to oranges" in terms of performance.  I personally use this kind of testing each time I buy a new computer, install new compiler etc.
+I personally use this benchmark every time I buy a new computer, install a new compiler, or update my environment.
 
-Java
--------------
+---
 
-You may want to run it within your favorite IDE (say Eclipse). In this case you may want to use run configuration. Add two arguments (a number of inner loops and a number of outer loops) 
-separated by blank in  **Arguments** tab of your run configuration. You may want to start from say 1000 300 (which for sure depends on you CPU clock speed) and than adjust it as needed.
+## Java
 
-The file with source code is **Dwhet.java**.
+You may want to run the benchmark in your favorite IDE (e.g., Eclipse). In that case, configure your run settings to include two arguments—inner loop count and outer loop count—separated by a space in the **Arguments** tab.
 
-It is easy to change it for testing on a server side, say by creating corresponding servlrets out of this file.
+Try starting with: `1000 300` (adjust depending on your CPU speed).
+
+* Source file: **Dwhet.java**
+* Easy to adapt for server-side use, such as wrapping into a servlet.
+
+---
+
+## C
+
+* Source file: **dwhet.c**
+* Compiles cleanly under GCC 15.1.0. Some systems may require minor adjustments to the timing functions.
+
+**Compile using:**
 
 
-C
--------------
-
-The file with source code is **dwhet.c**.
-It runs fine under gcc version 14.2.0  
-Your compiler may complain on how to deal with timing, in this case minor chages will be required.
- 
-It was compiled using the following command:
 gcc -Ofast dwhet.c -o dwhet_run_fast -lm
 
-3000 and 1000 was used as a number of inner loops and a number of outer loops 
+**Or with Intel Compiler:**
 
-Also it was compiled with Intel(R) Parallel Studio XE 2020 Update 1 for Linux with icc version 19.1.1.217  
-using the following command:
+
 icc dwhet.c -o Dwhet_optimized_with_intel_c.exe -O3 -ipo -no-prec-div
 
 
-C++ for Microsoft Visual Studio 2017 - 2022
--------------
-The file with source code is **Dwhet.cpp**.
-As you may guess, the program is compliled with Microsoft Visual Studio 2017 - 2022 and can be run within it.
-To compile you may want to do the following
-1. Create new project as Visual C++ console application. For brevity we will further use name Dwhet for it.
-2. Open Dwhet.cpp within the project (if needed replace content with Dwhet.cpp from this repository).
-3. Choose Project | Properties and after that add _CRT_SECURE_NO_WARNINGS; to Preprocessor Definitions (just after CONSOLE);
-Please note that you will need to do point 3 above both for Debug and Release configurations
-3000 and 1000 was used as a number of inner loops and a number of outer loops  for PC with Intel Core i7 @ 2.8 GHz
 
-  
+Suggested arguments: `3000 1000`
 
-Fortran
--------------
+---
 
-The source code is in file **dwhet.f**. It is compiled gfortran but you can adjust it to your fortran compiler with little or no changes. 
-You may want to start from 6000 2000 as a number of inner loops and a number of outer loops and after several runs adjust it accordingly.
+## C++ (Microsoft Visual Studio 2017–2022)
 
-Examples of compile and run using different compilers:
+* Source file: **Dwhet.cpp**
 
-1. **Intel(R) Fortran Compiler Version  19.1.1.217** from Intel(R) Parallel Studio XE 2020 Update 1 for Linux  
+**Instructions:**
+
+1. Create a new project: Visual C++ Console Application (e.g., name it `Dwhet`)
+2. Replace the default `Dwhet.cpp` with the version from this repo.
+3. Go to Project → Properties, and add `_CRT_SECURE_NO_WARNINGS;` to **Preprocessor Definitions**
+
+> Repeat step 3 for both Debug and Release configurations.
+
+Suggested arguments: `3000 1000` (e.g., for Intel Core i7 @ 2.8 GHz)
+
+---
+
+## Fortran
+
+* Most compilers use **dwhet.f**
+* For NVIDIA `nvfortran`, use: **parallel.cuf**
+
+**Suggested arguments:** `6000 2000`, then adjust.
+
+### Example compilation:
+
+**Intel Fortran:**
+
+
 ifort dwhet.f -o Dwhet_optimized_with_intel -O3 -ipo -no-prec-div
-or 
-ifort dwhet.f -o Dwhet_optimized_with_intel -Ofast
 
-2. **gfortran from gcc  14.2.0**
+
+
+
+
+**GFortran:**
+
 
 gfortran dwhet.f -o Dwhet_gcc -Ofast
 
 
-3. **pgfortran 19.10-0 64-bit**
+**PGI:**
 
-pgfortran -opgi_dwhet_2020.exe -O3 dwhet.f   
 
-Suppose that you run  your code (compiled as shown above) from command line, you will be asked to a enter number of inner loops and a number of outer loops. Please see recommendations above.
+pgfortran -opgi_dwhet_2020.exe -O3 dwhet.f
 
- 
-Free Pascal
--------------
 
-I tried this one on Windows 11 and Ubuntu 20.04 (under WSL). 
-If you use the latest release (which is 3.2.2 at the time of writing) and if your Windows System is 64-bit you may want to use ppcrossx64.exe with corresponding options for compilation.
-Options depend on your CPU. For example, if you have Intel Core i7 CPU like Intel Core i7-1360P
-you may want to use the following options:
+
+### NVIDIA CUDA Fortran:
+
+If your system supports CUDA 12.7 and you're using `nvhpc-25-5-cuda-multi` (e.g., in Ubuntu 24.04 on WSL2 under Windows 11 pro), compile with:
+
+
+nvfortran -cuda whet_cuda_parallel.cuf -o whet_cuda_parallel
+
+
+**Suggested inputs (for GPUs like RTX 4070 with 8GB VRAM):**
+
+
+Enter inner loop count:   3600000
+Enter outer loop count:   1200000
+Enter number of GPU threads: 8192
+
+
+Adjust these for your GPU capabilities.
+
+---
+
+## Free Pascal
+
+Tested on Windows 11 pro and Ubuntu 20.04 (via WSL2).
+
+* Source: **whet.pas**
+
+**Windows (64-bit with Core i7-1360P):**
+
 
 ppcrossx64 -O3 -OoFASTMATH -CpCOREAVX2 -Xs -XX -Sh whet.pas
 
-If you use it on Ubuntu 20.04 you may want to use fpc.
-The file name is   **whet.pas** 
 
-Julia
--------------
-You may want to try the following command:
+
+**Ubuntu:**
+
+
+fpc whet.pas
+
+
+---
+
+## Julia
+
+* Source: **whestone.jl**
+
+**Compile with:**
+
 
 julia --optimize=3 --check-bounds=no whestone.jl
 
-The file name is **whestone.jl**.
 
-For the first run you may want to use 1000 3000 as a number of inner loops and a number of outer loops. After that you may want to adjust it according to your CPU clock speed.
+Try: `1000 3000`, then adjust as needed.
 
-Rust
--------------
-Please note the structure of directories under whetstone_rust foldrer as you may want to use something similar.
-As we are going to use Cargo, Cargo.toml file is included.
+---
 
-The file with whetstone code is **main.rs** under src folder.
+## Rust
 
-It is compiled using the following command:
+* File: **main.rs** under `src/`
+* Project structure supports Cargo
+
+**Compile:**
+
 
 cargo build --release
 
-Executable file (e.g. whetstone_rust.exe if you run on windows) will be created under target/release folder.
 
-Executable can be run with the following command:
+**Run:**
+
 
 cargo run --release
 
 
-As with other languages you may want to start with 1000 3000 as a number of inner loops and a number of outer loops and after that adjust it according to your CPU clock speed.
+Try: `1000 3000` as initial loop parameters.
 
+---
 
-My articles in Java Development Journal  that may help you
--------------
-http://web.archive.org/web/20190703063724/http://anatolykrivitsky.sys-con.com/ 
+## My Articles in Java Developer's Journal
 
-Legal text related to the code
--------------
+http://web.archive.org/web/20190703063724/http://anatolykrivitsky.sys-con.com/
 
-**Copyright notes**
+---
 
- (c) Copyright 2002 - 2025 Anatoly S. Krivitsky, Ph.D.
- All rights reserved
+## Legal Text Related to the Code
 
- Conditional permission for free use of the code
- As soon as above copyright notes are mentioned,
- the author grants a permission to any person or organization
- to use, distribute and publish this code for free
- Questions and comments may be directed to the author at
- akrivitsky@yahoo.com and akrivitsky@gmail.com
+### **Copyright Notice**
 
-**Disclaimer of Liability**
-  The user assumes all responsibility
- and risk for the use of this code "as is".
- There is no  warranty of any kind associated with the code.
- Under no circumstances, including negligence, shall the author be liable
- for any DIRECT, INDIRECT, INCIDENTAL, SPECIAL or CONSEQUENTIAL DAMAGES,
- or LOST PROFITS that result from the use or inability to use the code.
- Nor shall the author be liable for any such damages including,
- but not limited to, reliance by any person on any
- information obtained with the code
- 
- 
+(c) 2002–2025 Anatoly S. Krivitsky, Ph.D.
+All rights reserved.
+
+You are granted permission to use, distribute, and publish this code freely, provided the above copyright is retained.
+
+**Contact:**
+[akrivitsky@yahoo.com](mailto:akrivitsky@yahoo.com)
+[akrivitsky@gmail.com](mailto:akrivitsky@gmail.com)
+
+---
+
+### **Disclaimer of Liability**
+
+This code is provided "as is" without warranty of any kind.
+Use at your own risk.
+The author is not liable for any damages, direct or indirect, including (but not limited to) lost profits, data corruption, or hardware failure resulting from use or inability to use of the code.
+
+---
+
 
