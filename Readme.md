@@ -21,7 +21,7 @@ Try starting with: `1000 300` (adjust depending on your CPU speed).
 ## C
 
 * Source file: **dwhet.c**
-* Compiles cleanly under GCC 15.1.0. Some systems may require minor adjustments to the timing functions.
+* Compiles cleanly under GCC 15.2 Some systems may require minor adjustments to the timing functions.
 
 **Compile using:**
 
@@ -77,12 +77,6 @@ ifort dwhet.f -o Dwhet_optimized_with_intel -O3 -ipo -no-prec-div
 
 
 gfortran dwhet.f -o Dwhet_gcc -Ofast
-
-
-**PGI:**
-
-
-pgfortran -opgi_dwhet_2020.exe -O3 dwhet.f
 
 
 
